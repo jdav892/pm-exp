@@ -2,20 +2,28 @@
 
 import React, { useState } from 'react'
 import Image from "next/image"
-import { Icon, LockIcon, LucideIcon } from 'lucide-react';
+import { Home, Icon, LockIcon, LucideIcon, X } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/app/redux';
+import { setIsSidebarCollapsed } from '@/state';
 
 const Sidebar = () => {
     //Used to show if sidebar projects exist or not
     const [showProjects, setShowProjects] = useState(true);
     const [showPriority, setPriority] = useState(true);
+
+    const dispatch = useAppDispatch()
+    const isSidebarCollapsed = useAppSelector(
+        (state) => state.global.isSidebarCollapsed,
+    );
+
     //generates a fixed column for the side bar
     const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
     transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
-    w-64
+    ${isSidebarCollapsed ? "w-0 hidden" : "w-64"}
     `;
+
     return (
     <div className={sidebarClassNames}>
         <div className="flex h-[100%] w-full flex-col justify-start">
@@ -24,6 +32,16 @@ const Sidebar = () => {
                 <div className="text-xl font-bold text-gray-800 dark:text-white">
                     TEAM LIST
                 </div>
+                {isSidebarCollapsed ? null : (
+                    <button 
+                    className="py-3" 
+                    onClick={ () => {
+                        dispatch(setIsSidebarCollapsed(!isSidebarCollapsed));
+                    }}
+                >
+                    <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
+                </button>
+                )}
             </div>
             {/* TEAM */}
             <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
@@ -39,6 +57,13 @@ const Sidebar = () => {
                 </div>
             </div>
             {/* NAVBAR LINKS */}
+            <nav className="z-10 w-full ">
+                <SidebarLink
+                icon={Home}
+                label="Home"
+                href="/"
+                />
+            </nav>
         </div>
     </div>
   )
@@ -48,7 +73,7 @@ interface SidebarLinkProps {
     href: string,
     icon: LucideIcon; 
     label: string;
-    isCollapsed: boolean;
+    //isCollapsed: boolean;
 
 }
 
@@ -56,7 +81,7 @@ const SidebarLink = ({
     href,
     icon: Icon,
     label,
-    isCollapsed
+    //isCollapsed
 }: SidebarLinkProps) => {
     const pathname = usePathname();
     const isActive = pathname === href || (pathname === "/" && href === "/dashboard");
@@ -79,7 +104,7 @@ const SidebarLink = ({
 
                     <Icon className="h-6 w-6 text-gray-800 dark:text-gray-100" />
                     <span className={`font-medium text-gray-800 dark:text-gray-100`}>
-                        
+                    {label}
                     </span>
                 </div>
         </Link>  
