@@ -46,7 +46,6 @@ async function main(){
            const model: any = prisma[modelName as keyof typeof prisma];
 
            try{
-            //iterates over jsonData to create seed data
             for(const data of jsonData){
                 await model.create({ data });
             }

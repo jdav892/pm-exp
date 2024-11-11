@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -17,7 +16,7 @@ datasource db {
 model User {
   userId            Int     @id @default(autoincrement())
   cognitoId         String  @unique
-  userName          String  @unique
+  username          String  @unique
   profilePictureUrl String?
   teamId            Int?
 
@@ -68,7 +67,7 @@ model Task {
   points         Int?
   projectId      Int
   authorUserId   Int
-  assignedUserId Int
+  assignedUserId Int?
 
   project         Project          @relation(fields: [projectId], references: [id])
   author          User             @relation("TaskAuthor", fields: [authorUserId], references: [userId])
@@ -79,25 +78,24 @@ model Task {
 }
 
 model TaskAssignment {
+  id     Int @id @default(autoincrement())
+  userId Int
+  taskId Int
+  
+  user User @relation(fields:[userId], references: [userId])
+  task Task @relation(fields:[taskId], references: [id])
+  
+}
+
+model Attachment {
   id           Int     @id @default(autoincrement())
   fileURL      String
   fileName     String?
   taskId       Int
-  uploadedByID Int
+  uploadedById Int
 
   task       Task @relation(fields: [taskId], references: [id])
   uploadedBy User @relation(fields: [uploadedById], references: [userId])
-}
-
-model Attachment {
-  id  Int @id @default(autoincrement())
-  fileURL String
-  fileName  String?
-  taskId  Int
-  uploadedById  Int
-
-  task  Task  @relation(fields:[taskId], references:[id])
-  uploadedBy User @relation(fields:[uploadedById], references:[userId])
 }
 
 model Comment {
