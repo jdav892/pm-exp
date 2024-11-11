@@ -89,6 +89,17 @@ model TaskAssignment {
   uploadedBy User @relation(fields: [uploadedById], references: [userId])
 }
 
+model Attachment {
+  id  Int @id @default(autoincrement())
+  fileURL String
+  fileName  String?
+  taskId  Int
+  uploadedById  Int
+
+  task  Task  @relation(fields:[taskId], references:[id])
+  uploadedBy User @relation(fields:[uploadedById], references:[userId])
+}
+
 model Comment {
   id     Int    @id @default(autoincrement())
   text   String
