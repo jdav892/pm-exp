@@ -93,6 +93,17 @@ export const api = createApi({
             }),
             //same as above to update list of tasks when creating a new list of tasks
             invalidatesTags: ["Tasks"]
+        }),
+        updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
+            query: ({ taskId, status}) => ({
+                //updating specific tasks
+                url: `tasks/${taskId}/status`,
+                method: "PATCH",
+                body: { status },
+            }),
+            invalidatesTags: (result, error, { taskId }) => [
+                { type: "Tasks", id: taskId },
+            ]
         })
     }),
 })
