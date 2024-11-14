@@ -5,9 +5,17 @@ type Props = {
 }
 
 const Project = ({ params }: Props) => {
+    const { id } = params;
+    const {activeTab, setActiveTab} = useState("Board");
+    const { isModalNewTaskOpen, setIsModalNewTaskOpen} = useState(false);
 
-    
-    return <div>Project</div>
+    return <div>
+        {/* MODAL NEW TASKS*/}
+        <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+        {/* { activeTab === "Board && (
+        <Board />
+        )} */}
+    </div>
 }
 
 export default Project 
