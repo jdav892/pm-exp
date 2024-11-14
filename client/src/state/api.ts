@@ -24,6 +24,23 @@ export enum Priority {
     Backlog = "Backlog",
 }
 
+export interface User {
+    userId?: number;
+    username: string;
+    email: string;
+    profilePictureUrl?: string;
+    cognitoId?: string;
+    teamId?: number;
+}
+
+export interface Attachment {
+    id: number;
+    fileUrl: string;
+    fileName: string;
+    taskId: number;
+    uploadedById: number;
+} 
+
 export interface Task {
     id: number;
     title: string;
@@ -36,6 +53,12 @@ export interface Task {
     projectId?: number;
     authorUser?: number;
     assignUserId?: number;
+
+    author?: UserActivation;
+    assignee?: UserActivation;
+    comments?: Comment();
+    attachments?: Attachment();
+
 }
 
 
