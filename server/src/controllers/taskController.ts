@@ -7,7 +7,7 @@ export const getTasks = async (
     req: Request,
     res: Response
 ): Promise<void> => {
-    const {projectId} = req.query;
+    const { projectId } = req.query;
     try { 
         const tasks = await prisma.task.findMany({
             where: {
@@ -18,7 +18,7 @@ export const getTasks = async (
                 assignee: true,
                 comments: true,
                 attachments: true,
-            }
+            },
         });
         res.json(tasks)
     }catch (error: any){

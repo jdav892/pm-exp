@@ -61,6 +61,19 @@ export interface Task {
 
 }
 
+export interface SearchResults {
+    tasks?: Task[];
+    projects?: Project[];
+    user?: User[];
+}
+
+export interface Team {
+    teamId: number;
+    teamName: string;
+    productOwnerUserId?: number;
+    projectManagerUserId: number;
+}
+
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
@@ -75,14 +88,15 @@ export const api = createApi({
             query: (project) => ({
                 url: "projects",
                 method: "POST",
-                body: project
+                body: project,
             }),
             //to fetch updated list of projects on call
-            invalidatesTags: ["Projects"]
+            invalidatesTags: ["Projects"],
         }),
         getTasks: build.query<Task[], { projectId: number }>({
             query: ({ projectId }) => `tasks?projectId=${projectId}`,
-            providesTags: (result) => result ? result.map(( {id}) => ({ type: "Tasks" as const, id}))
+            providesTags: (result) => result ? 
+            result.map(({id}) => ({ type: "Tasks" as const, id}))
             : [{ type:"Tasks" as const }],
         }),
         createTasks: build.mutation<Task, Partial<Task>>({
@@ -92,10 +106,10 @@ export const api = createApi({
                 body: task,
             }),
             //same as above to update list of tasks when creating a new list of tasks
-            invalidatesTags: ["Tasks"]
+            invalidatesTags: ["Tasks"],
         }),
         updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
-            query: ({ taskId, status}) => ({
+            query: ({ taskId, status }) => ({
                 //updating specific tasks
                 url: `tasks/${taskId}/status`,
                 method: "PATCH",

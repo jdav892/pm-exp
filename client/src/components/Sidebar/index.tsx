@@ -2,18 +2,36 @@
 
 import React, { useState } from 'react'
 import Image from "next/image"
-import { AlertCircle, AlertOctagon, AlertTriangle, Briefcase, ChevronDown, ChevronUp, Home, Icon, Layers3, LockIcon, LucideIcon, Search, Settings, ShieldAlert, User, Users, X } from 'lucide-react';
+import { AlertCircle, 
+    AlertOctagon, 
+    AlertTriangle, 
+    Briefcase, 
+    ChevronDown, 
+    ChevronUp, 
+    Home, 
+    Layers3, 
+    LockIcon, 
+    LucideIcon, 
+    Search, 
+    Settings, 
+    ShieldAlert, 
+    User, 
+    Users, 
+    X 
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsSidebarCollapsed } from '@/state';
+import { useGetProjectsQuery } from '@/state/api';
 
 const Sidebar = () => {
     //Used to show if sidebar projects exist or not
     const [showProjects, setShowProjects] = useState(true);
     const [showPriority, setShowPriority] = useState(true);
 
-    const dispatch = useAppDispatch()
+    const { data: projects } = useGetProjectsQuery();
+    const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector(
         (state) => state.global.isSidebarCollapsed,
     );
@@ -67,7 +85,7 @@ const Sidebar = () => {
             </nav>
             {/*PROJECTS LINKS*/}
             <button onClick ={() => setShowProjects((prev) => !prev)} 
-            className="flex w-full items-center justify-between px-8 py03 text-gray-500">
+            className="flex w-full items-center justify-between px-8 py-3 text-gray-500">
                 <span className="">Projects</span>
                 {showProjects ? (
                     <ChevronUp className="h-5 w-5"/>
@@ -76,7 +94,15 @@ const Sidebar = () => {
                 )}
             </button>
             {/*PROJECTS LIST*/}
-
+            {showProjects && 
+                projects?.map((project) => (
+                    <SidebarLink
+                        key={project.id}
+                        icon={Briefcase}
+                        label={project.name}
+                        href={`/projects/${project.id}`}
+                    />
+            ))}
             {/*PRIORITIES LINKS*/}
             <button onClick ={() => setShowPriority((prev) => !prev)} 
             className="flex w-full items-center justify-between px-8 py03 text-gray-500">

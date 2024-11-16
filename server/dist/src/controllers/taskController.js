@@ -24,7 +24,7 @@ const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 assignee: true,
                 comments: true,
                 attachments: true,
-            }
+            },
         });
         res.json(tasks);
     }
