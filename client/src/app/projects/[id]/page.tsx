@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState } from 'react'
-import ProjectHeader from "@/app/projects/ProjectHeader"
+import React, {useState} from 'react'
+import ProjectHeader from '@/app/projects/ProjectHeader'
 
 type Props = {
     params: { id: string };
@@ -10,17 +10,14 @@ type Props = {
 const Project = ({ params }: Props) => {
     const { id } = params;
     const [activeTab, setActiveTab] = useState("Board");
-    const [ IsModalNewTaskOpen, setIsModalNewTaskOpen ] = useState(false);
+    const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
+    console.log("Rendering project with ID:", id);
+  return (
+    <div>
+        {/*MODAL NEW TASK*/}
+        <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+    </div>
+  );
+};
 
-    return ( 
-        <div>
-            {/* MODAL NEW TASKS*/}
-            {/*<ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />*/}
-            {/* { activeTab === "Board && (
-            <Board />
-            )} */}
-        </div>
-    )
-}
-
-export default Project 
+export default Project;
