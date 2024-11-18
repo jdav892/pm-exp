@@ -1,6 +1,9 @@
 import React from 'react'
 
-type Props = {}
+type Props = {
+    id: string;
+    setIsModalNewTaskOpen: (isOpen: boolean) => void;
+}
 
 const ListView = (props: Props) => {
   return (
