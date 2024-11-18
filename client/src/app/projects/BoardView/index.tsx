@@ -4,7 +4,7 @@ import React from 'react'
 import { DndProvider, useDrag, useDrop } from "react-dnd"
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Task as TaskType } from "@/state/api"
-import { EllipsisVertical, Plus } from 'lucide-react';
+import { EllipsisVertical, MessageSquare, MessageSquareMore, Plus } from 'lucide-react';
 import { format } from 'date-fns'
 import Image from 'next/image';
 
@@ -160,7 +160,7 @@ const Task = ({ task }: TaskProps) => {
                 isDragging ? "opacity-50" : "opacity-100"
                 }`}
             >
-                {task.attachments && task.attachments.length > 0 && (
+              {/* {task.attachments && task.attachments.length > 0 && (
                     <Image
                         src={`/${task.attachments[0].fileUrl}`}
                         alt={task.attachments[0].fileName}
@@ -169,6 +169,7 @@ const Task = ({ task }: TaskProps) => {
                         className="h-auto w-full rounded-t-md"
                     />    
                 )}
+              */}
                 <div className="p-4 md:p-6">
                     <div className="flex items-start justify-between">
                         <div className="flex flex-1 flex-wrap items-center gap-2">
@@ -218,7 +219,24 @@ const Task = ({ task }: TaskProps) => {
                                     className="h-8 w-8 rounded-full border-2 border-white object-cover darK:border-dark-secondary"
                                     />
                             )}
+                            {task.author && (
+                                <Image
+                                key={task.author.userId}
+                                src={`/${task.author.profilePictureUrl!}`}
+                                alt={task.author.username}
+                                width={30}
+                                height={30}
+                                className="h-8 w-8 rounded-full border-2 border-white object-cover dark:border-dark-secondary"
+                                />
+                            )}
                         </div>
+                       <div className="flex items-center text-gray-500 dark:text-neutral-500">
+                        <MessageSquareMore size={20}/>
+                        <span className="ml-1 text-sm dark:text-neutral-400">
+                            {numberOfComments}
+                            {/*TODO: Add comment interface*/}
+                        </span>
+                       </div>
                     </div>
                 </div>
             </div>
