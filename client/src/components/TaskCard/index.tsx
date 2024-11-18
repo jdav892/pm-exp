@@ -1,8 +1,7 @@
-import { Task } from "@/state/api"
-import { format } from "date-fns"
-import React from 'react'
-import Image from "next/image"
-import { Italic, Underline } from "lucide-react"
+import { Task } from "@/state/api";
+import { format } from "date-fns";
+import React from 'react';
+import Image from "next/image";
 
 type Props = {
     task: Task
