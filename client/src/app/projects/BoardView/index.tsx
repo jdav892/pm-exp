@@ -4,7 +4,7 @@ import React from 'react'
 import { DndProvider, useDrag, useDrop } from "react-dnd"
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Task as TaskType } from "@/state/api"
-import { EllipsisVertical, MessageSquare, MessageSquareMore, Plus } from 'lucide-react';
+import { EllipsisVertical, Italic, MessageSquare, MessageSquareMore, Plus } from 'lucide-react';
 import { format } from 'date-fns'
 import Image from 'next/image';
 
@@ -160,6 +160,11 @@ const Task = ({ task }: TaskProps) => {
                 isDragging ? "opacity-50" : "opacity-100"
                 }`}
             >
+                  <span>
+                        <strong>
+                            (Attachments Here)
+                            </strong>
+                    </span>
               {/* {task.attachments && task.attachments.length > 0 && (
                     <Image
                         src={`/${task.attachments[0].fileUrl}`}

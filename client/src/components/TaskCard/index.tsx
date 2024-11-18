@@ -2,6 +2,7 @@ import { Task } from "@/state/api"
 import { format } from "date-fns"
 import React from 'react'
 import Image from "next/image"
+import { Italic, Underline } from "lucide-react"
 
 type Props = {
     task: Task
@@ -14,7 +15,7 @@ const TaskCard = ({ task }: Props) => {
             <div>
                 <strong>Attachments:</strong>
                 <div className="flex flex-wrap">
-                    {task.attachments && task.attachments.length > 0 && (
+                   {/* {task.attachments && task.attachments.length > 0 && (
                         <Image
                         src={`/${task.attachments[0].fileUrl}`}
                         alt={task.attachments[0].fileName}
@@ -22,7 +23,12 @@ const TaskCard = ({ task }: Props) => {
                         height={200}
                         className="rounded-md"
                         />
-                    )}
+                    )} */}
+                    <span>
+                        <strong>
+                            (Attachments Here)
+                            </strong>
+                    </span>
                 </div>
             </div>
         )}
