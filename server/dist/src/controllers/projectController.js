@@ -31,7 +31,7 @@ const createProjects = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 description,
                 startDate,
                 endDate,
-            }
+            },
         });
         res.status(201).json(newProject);
     }
