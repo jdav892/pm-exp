@@ -74,7 +74,7 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
      } = useGetTasksQuery({ projectId: Number(id )});
 
      if(isLoading) return <div>Loading....</div>
-     if(error) return <div>An error occured while fetching tasks</div>;
+     if(error) return <div>An error occurred while fetching tasks</div>;
 
   return (
     <div className="h-[540px] w-full px-4 pb-8 xl:px-6">
@@ -82,10 +82,10 @@ const TableView = ({ id, setIsModalNewTaskOpen }: Props) => {
             <Header name="Table" 
                 buttonComponent={
                     <button
-                        className="flex items-center bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
+                        className="flex items-center rounded bg-blue-primary px-3 py-2 text-white hover:bg-blue-600"
                         onClick={() => setIsModalNewTaskOpen(true)}
                     >
-                        Add task
+                        Add Task
                     </button>
                 } 
             isSmallText />
