@@ -16,7 +16,7 @@ const Timeline = () => {
     
     const [displayOptions, setDisplayOptions] = useState<DisplayOption>({
         viewMode: ViewMode.Month,
-        local: "en-US"
+        locale: "en-US"
     })
 
     const ganttTasks = useMemo(() => {
@@ -70,7 +70,9 @@ const Timeline = () => {
                     {...displayOptions}
                     columnWidth={displayOptions.viewMode === ViewMode.Month ? 150 : 100}
                     listCellWidth="100px"
-                    projectBackgroudColor={isDarkMode}
+                    projectBackgroundColor={isDarkMode ? "#101214" : "#1F2937"}
+                    projectProgressColor={isDarkMode ? "#1F2937" : "#aeb8c2" }
+                    projectProgressSelectedColor={isDarkMode ? "#000" : "#9ba1a6"}
                 />
             </div>
         </div>
