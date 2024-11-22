@@ -6,9 +6,10 @@ import { formatISO } from "date-fns"
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    id: string;
 }
 
-const ModalNewTask = ({ isOpen, onClose }: Props) => {
+const ModalNewTask = ({ isOpen, onClose, id=null }: Props) => {
     const [createTask, {isLoading}] = useCreateTasksMutation();
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -21,7 +22,7 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
     const [assignedUserId, setAssignedUserId] = useState("");
 
     const handleSubmit = async () => {
-        if(!title) return;
+        if(!title || !authorUserId) return;
         
         const formattedStartDate = formatISO(new Date(startDate), { representation: "complete"})
         const formattedDueDate = formatISO(new Date(dueDate), { representation: "complete"})
@@ -36,25 +37,28 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
             startDate: formattedStartDate,
             dueDate: formattedDueDate,
             authorUserId: parseInt(authorUserId),
-            assignedUserId: parseInt(assignedUserId)
+            assignedUserId: parseInt(assignedUserId),
+            projectId: Number(id),
         });
     };
 
     const isFormValid = () => {
-        return title;
+        return title && authorUserId;
     }
 
-    const selectStyles = "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:text-white dark:focus:outline-none";
+    const selectStyles = 
+    "mb-4 block w-full rounded border border-gray-300 px-3 py-2 dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
-    const inputStyles = "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
+    const inputStyles = 
+    "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="Create New Task">
         <form
             className='mt-4 space-y-6'
-            onSubmit={(userInput) => {
-                userInput.preventDefault();
+            onSubmit={(x) => {
+                x.preventDefault();
                 handleSubmit();
             }}
             >
@@ -62,20 +66,21 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
                  className={inputStyles} 
                  placeholder="Title" 
                  value={title} 
-                 onChange={(userInput) => setTitle(userInput.target.value)}
+                 onChange={(x) => setTitle(x.target.value)}
                 />
                 <textarea
                  className={inputStyles} 
                  placeholder="Description" 
                  value={description} 
-                 onChange={(userInput) => setDescription(userInput.target.value)}
+                 onChange={(x) => setDescription(x.target.value)}
                 />
                                 
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
                     <select
                             className={selectStyles}
                             value={status}
-                            onChange={(userInput) => setStatus(Status[userInput.target.value as keyof typeof Status])}
+                            onChange={(x) => 
+                                setStatus(Status[x.target.value as keyof typeof Status])}
                         >
                             <option value="">Select Status</option>
                             <option value={Status.ToDo}>To Do</option>
@@ -86,7 +91,8 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
                     <select
                             className={selectStyles}
                             value={priority}
-                            onChange={(userInput) => setPriority(Priority[userInput.target.value as keyof typeof Priority])}
+                            onChange={(x) => 
+                                setPriority(Priority[x.target.value as keyof typeof Priority])}
                         >
                             <option value="">Select Status</option>
                             <option value={Priority.Urgent}>Urgent</option>
@@ -100,7 +106,7 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
                  className={inputStyles} 
                  placeholder="Tags(comma separated)" 
                  value={tags} 
-                 onChange={(userInput) => setTags(userInput.target.value)}
+                 onChange={(x) => setTags(x.target.value)}
                 />
 
                 <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-2">
@@ -108,26 +114,26 @@ const ModalNewTask = ({ isOpen, onClose }: Props) => {
                  className={inputStyles} 
                  placeholder="Start Date" 
                  value={startDate} 
-                 onChange={(userInput) => setStartDate(userInput.target.value)}
+                 onChange={(x) => setStartDate(x.target.value)}
                 />
                 <input type="date"
                  className={inputStyles} 
                  placeholder="Due Date" 
                  value={dueDate} 
-                 onChange={(userInput) => setDueDate(userInput.target.value)}
+                 onChange={(x) => setDueDate(x.target.value)}
                 />
             </div>
             <input type="text"
                  className={inputStyles} 
                  placeholder="Author User ID" 
                  value={authorUserId} 
-                 onChange={(userInput) => setAuthorUserId(userInput.target.value)}
+                 onChange={(x) => setAuthorUserId(x.target.value)}
                 />
                  <input type="text"
                  className={inputStyles} 
                  placeholder="Assigned User Id" 
                  value={assignedUserId} 
-                 onChange={(userInput) => setAssignedUserId(userInput.target.value)}
+                onChange={(x) => setAssignedUserId(x.target.value)}
                 />
             <button
                 type="submit"

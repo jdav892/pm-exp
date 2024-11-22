@@ -51,8 +51,8 @@ export interface Task {
     startDate?: string;
     dueDate?: string;
     projectId?: number;
-    authorUser?: number;
-    assignUserId?: number;
+    authorUserId?: number;
+    assignedUserId?: number;
 
     author?: UserActivation;
     assignee?: UserActivation;
