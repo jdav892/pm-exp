@@ -64,6 +64,12 @@ export interface Task {
 export interface SearchResults {
     tasks?: Task[];
     projects?: Project[];
+    users?: User[];
+}
+
+export interface SearchResults {
+    tasks?: Task[];
+    projects?: Project[];
     user?: User[];
 }
 
@@ -118,6 +124,9 @@ export const api = createApi({
             invalidatesTags: (result, error, { taskId }) => [
                 { type: "Tasks", id: taskId },
             ]
+        }),
+        search: build.query<SearchResults, string>({
+            query: (query) => `search?query=${query}`,
         })
     }),
 })
@@ -127,5 +136,6 @@ export const {
     useCreateProjectMutation, 
     useGetTasksQuery, 
     useCreateTasksMutation,
-    useUpdateTaskStatusMutation 
+    useUpdateTaskStatusMutation,
+    useSearchQuery 
 } = api
