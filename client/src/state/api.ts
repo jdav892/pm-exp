@@ -67,19 +67,12 @@ export interface SearchResults {
     users?: User[];
 }
 
-export interface SearchResults {
-    tasks?: Task[];
-    projects?: Project[];
-    user?: User[];
-}
-
 export interface Team {
     teamId: number;
     teamName: string;
     productOwnerUserId?: number;
     projectManagerUserId: number;
 }
-
 
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL}),
