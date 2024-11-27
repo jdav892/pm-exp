@@ -2,10 +2,11 @@
 
 import { useAppSelector } from '@/app/redux';
 import { Priority, Project, Task, useGetProjectsQuery, useGetTasksQuery,} from '@/state/api';
-import { GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import React from 'react';
 import Header from '../Header';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { dataGridSxStyles } from '@/lib/utils';
 
 
 const taskColumns: GridColDef[] = [
@@ -118,6 +119,22 @@ const HomePage = () => {
                     <Legend />
                     </PieChart>
                 </ResponsiveContainer>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary md:col-span-2">
+                <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                    Your Tasks
+                </h3>
+                <div style={{height: 350, width: "100%"}}>
+                    <DataGrid
+                        rows={tasks}
+                        columns={taskColumns}
+                        checkboxSelection
+                        loading={tasksLoading}
+                        getRowClassName={() => "data-grid-row"}
+                        getCellClassName={() => "data-grid-cell"}
+                        sx={dataGridSxStyles(isDarkMode)}
+                />
+                </div>
             </div>
         </div>
     </div>
