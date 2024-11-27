@@ -6,7 +6,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import React from 'react';
 import Header from '../Header';
 import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { dataGridSxStyles } from '@/lib/utils';
+import { dataGridClassNames, dataGridSxStyles } from '@/lib/utils';
 
 
 const taskColumns: GridColDef[] = [
@@ -132,8 +132,9 @@ const HomePage = () => {
                         loading={tasksLoading}
                         getRowClassName={() => "data-grid-row"}
                         getCellClassName={() => "data-grid-cell"}
+                        className={dataGridClassNames}
                         sx={dataGridSxStyles(isDarkMode)}
-                />
+                    />
                 </div>
             </div>
         </div>
