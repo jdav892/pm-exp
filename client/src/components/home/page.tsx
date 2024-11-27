@@ -5,6 +5,7 @@ import { Priority, Project, Task, useGetProjectsQuery, useGetTasksQuery,} from '
 import { GridColDef } from '@mui/x-data-grid';
 import React from 'react';
 import Header from '../Header';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 
 const taskColumns: GridColDef[] = [
@@ -56,7 +57,6 @@ const HomePage = () => {
         count: statusCount[key],
     }));
 
-    
     const chartColors = isDarkMode ? {
         bar: "#8884d8",
         barGrid: "#303030",
@@ -73,7 +73,53 @@ const HomePage = () => {
   return (
     <div className="container h-full w-[100%] bg-gray-100 bg-transparent p-8">
         <Header name="Project Management Dashboard" />
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2"></div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
+                <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                    Task Priority Distribution
+                </h3> 
+                <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={taskDistribution}>
+                        <CartesianGrid
+                            strokeDasharray="3 3"
+                            stroke={chartColors.barGrid}
+                    />
+                    <XAxis dataKey="name" stroke={chartColors.text}/>
+                    <YAxis stroke={chartColors.text}/>
+                    <Tooltip contentStyle={{
+                        width: "min-content",
+                        height: "min-content",
+                    }} />
+                    <Legend />
+                    <Bar dataKey="count" fill={chartColors.bar} />
+                    </BarChart>
+                </ResponsiveContainer>
+            </div>
+            <div className="rounded-lg bg-white p-4 shadow dark:bg-dark-secondary">
+                <h3 className="mb-4 text-lg font-semibold dark:text-white">
+                    Project Status
+                </h3> 
+                <ResponsiveContainer width="100%" height={300}>
+                    <PieChart data={taskDistribution}>
+                        <Pie
+                        dataKey="count"
+                        data={projectStatus}
+                        fill="#82ca9d"
+                        label
+                        >
+                            {projectStatus.map((entry, index) => (
+                                <Cell 
+                                key={`cell-${index}`} 
+                                fill={COLORS[index % COLORS.length]}
+                            />
+                            ))}
+                        </Pie>
+                    <Tooltip />
+                    <Legend />
+                    </PieChart>
+                </ResponsiveContainer>
+            </div>
+        </div>
     </div>
   );
 };
