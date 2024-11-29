@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { Priority, useGetTasksByUserQuery, Task} from '@/state/api'
 import React, { useState } from 'react'
 import { useAppSelector } from '@/app/redux'
@@ -6,7 +7,7 @@ import ModalNewTask from '@/components/ModalNewTask'
 import Header from '@/components/Header'
 
 type Props = {
-    priority: Priority
+    priority: Priority;
 }
 
 const ReusablePriorityPage = ({ priority }: Props) => {
@@ -16,7 +17,7 @@ const ReusablePriorityPage = ({ priority }: Props) => {
     const userId = 1;
     const { data: tasks, isLoading, isError: isTasksError } = useGetTasksByUserQuery(userId || 0, {
         skip: userId === null
-    }) 
+    }); 
     
     const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
@@ -35,11 +36,12 @@ const ReusablePriorityPage = ({ priority }: Props) => {
                 className="mr-3 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
                 onClick={() => setIsModalNewTaskOpen(true)}
                 >
-                    Add Task
+                Add Task
             </button>
-        } />
+        } 
+        />
     </div>
-  )
-}
+  );
+};
 
 export default ReusablePriorityPage

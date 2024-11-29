@@ -103,7 +103,7 @@ export const api = createApi({
             providesTags: (result, error, userId) => 
                 result
                     ? result.map(({ id }) => ({ type: "Tasks", id}))
-                    : [{ type: "Tasks", id: userId}]
+                    : [{ type: "Tasks", id: userId}],
         }),
         createTasks: build.mutation<Task, Partial<Task>>({
             query: (task) => ({
