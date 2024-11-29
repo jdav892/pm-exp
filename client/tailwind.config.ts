@@ -22,7 +22,7 @@ export default {
         blue:{
           200: "#93c5fd",
           400: "#60a5fa",
-          500: "#3b892f6"
+          500: "#3b82f6"
         },
         "dark-bg": "#101214",
         "dark-secondary": "#1d1f21",
