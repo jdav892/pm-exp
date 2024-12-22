@@ -1,4 +1,4 @@
-Project Management App using Next.js/React/Tailwind/Node/Prisma/PostgreSQL
+Project Management App using Next.js/React/Tailwind/Node/Express/Prisma/PostgreSQL
 
 TODO: 
     
