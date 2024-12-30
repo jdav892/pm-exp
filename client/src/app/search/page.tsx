@@ -44,7 +44,7 @@ const Search = () => {
                 {isLoading && <p>Loading...</p>}
                 {isError && <p>Error occurred while fetching search results.</p>}
                 {!isLoading && !isError && searchResults && (
-                    <div>
+                    <div className="dark:text-white">
                         {searchResults.tasks && searchResults.tasks?.length > 0 && (
                             <h2>Tasks</h2>
                         )}
