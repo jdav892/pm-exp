@@ -1,5 +1,5 @@
 # Project Management Solution Template
-This application provides a simple, and performant interface for a organization to implement agile methodology across teams in an organization.
+This application provides a simple, and performant interface for an organization to implement agile methodology across teams in an organization.
 
 
 ## How It's Made:
