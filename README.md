@@ -4,7 +4,7 @@ This application provides a simple, and performant interface for an organization
 
 ## How It's Made:
 
-**Tech used:** Next.js, React.js, Redux, TailwindCSS, Node.js, Express, Prisma, PostreSQL.
+**Tech used:** Next.js, TypeScript,  React.js, Redux, TailwindCSS, Node.js, Express, Prisma, PostreSQL.
 
 Through the use of the vast React component packages available such as lucide-react I created a simple, yet intuitive UI. There's a dynamic display of task and project tables being read from the database along with assignee and assigner data. Integrates gantt charts for illustrated timelines and drag and drop grids to move tasks along a priority designation(Urgent -> High -> Medium -> Low -> Backlog -> Completed).
 A search functionality that pattern matches users and task ids from tasks table to display cards. 
