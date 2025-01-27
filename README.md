@@ -12,7 +12,7 @@ A search functionality that pattern matches users and task ids from tasks table 
 
 ## Optimizations:
 
-After running into off by 1 errors within my tables after migrations, this led to me defaulting to using raw SQL queries to accurately represent how the data displays within the tables. If I were to make this application from the ground up once again, I'd probably reach for Go or Rust which are more performant, statically type(more enforced than in TypeScript), and better support for concurrency on the backend. 
+After running into off by 1 errors within my tables after migrations, this led to me defaulting to using raw SQL queries to accurately represent how the data displays within the tables. If I were to make this application from the ground up once again, I'd probably reach for Go or Rust which are more performant, statically typed(more enforced than in TypeScript), and better support for concurrency on the backend. 
 
 ## Lessons Learned:
 
